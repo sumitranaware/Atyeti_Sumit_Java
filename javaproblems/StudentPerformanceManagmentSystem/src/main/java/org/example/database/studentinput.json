@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Sumit Ranaware",
+    "email": "sumit.ranaware@example.com",
+    "course": "Mathematics",
+    "marks": [78, 82, 91, 65, 70]
+  },
+  {
+    "id": 2,
+    "name": "Shubham Palkar",
+    "email": "shubham.palkar@example.com",
+    "course": "Physics",
+    "marks": [88, 74, 90, 85, 79]
+  },
+  {
+    "id": 3,
+    "name": "Rohit Patil",
+    "email": "rohit.patil@example.com",
+    "course": "Computer Science",
+    "marks": [92, 95, 87, 89, 93]
+  }
+]
