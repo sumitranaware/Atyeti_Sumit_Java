@@ -1,0 +1,31 @@
+[ {
+  "id" : 1,
+  "name" : "Sumit S Ranaware ",
+  "email" : "sumit8788@gmail.com",
+  "course" : "Computer Engineering ",
+  "marks" : [ 88, 88, 88, 89, 88 ]
+}, {
+  "id" : 2,
+  "name" : "Shubham Palkar",
+  "email" : "shubham.palkar@example.com",
+  "course" : "Physics",
+  "marks" : [ 88, 74, 90, 85, 79 ]
+}, {
+  "id" : 3,
+  "name" : "Rohit Patil",
+  "email" : "rohit.patil@example.com",
+  "course" : "Computer Science",
+  "marks" : [ 92, 95, 87, 89, 93 ]
+}, {
+  "id" : 4,
+  "name" : "Shreeraj Ghadage",
+  "email" : "shreeraj@gmail.com",
+  "course" : "computer engineering ",
+  "marks" : [ 77, 89, 87, 91, 99 ]
+}, {
+  "id" : 5,
+  "name" : "Raj",
+  "email" : "raj@gmail.com",
+  "course" : "computer engineering ",
+  "marks" : [ 98, 87, 98, 67, 99 ]
+} ]
