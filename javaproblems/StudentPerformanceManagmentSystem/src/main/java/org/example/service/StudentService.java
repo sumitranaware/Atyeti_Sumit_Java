@@ -1,6 +1,8 @@
 package org.example.service;
 
 import org.example.entity.Student;
+import org.example.exception.InvalidInputException;
+import org.example.exception.StudentNotFoundException;
 import org.example.repository.StudentRepository;
 
 import java.util.List;
@@ -12,10 +14,7 @@ public class StudentService {
     public StudentService(){
         studentList=studentRepository.loadStudents();
         if(studentList==null||studentList.isEmpty()){
-            System.out.println("No Students found in Student.json");
-        }else {
-            System.out.println("Loaded Student"+studentList);
-
+            System.out.println("No Students found in json");
         }
     }
     public void addStudent(Student student){
@@ -53,7 +52,7 @@ public void updateStudent(Student updateStudent){
         return studentList
                 .stream()
                 .filter(s->s.getId()==id)
-                .findFirst().orElse(null);
+                .findFirst().orElseThrow(()->new StudentNotFoundException("Student not found "));
     }
 
 

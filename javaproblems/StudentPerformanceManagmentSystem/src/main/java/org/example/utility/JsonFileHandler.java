@@ -11,7 +11,7 @@ public class JsonFileHandler {
     private static final ObjectMapper objectMapper=new ObjectMapper();
 
     public static <T>List<T> readFromJsonFile(String filePath , Class<T>cla){
-        File file=new File(filePath);
+        File file=new File(filePath).getAbsoluteFile();
         if(!file.exists()){
             return new ArrayList<>();
         }

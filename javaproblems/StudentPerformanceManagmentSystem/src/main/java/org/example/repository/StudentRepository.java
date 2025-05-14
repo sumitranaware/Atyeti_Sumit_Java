@@ -2,6 +2,7 @@ package org.example.repository;
 
 import org.example.entity.Student;
 import org.example.utility.JsonFileHandler;
+import org.example.utility.LoggerUtil;
 
 import java.security.PublicKey;
 import java.util.List;
@@ -15,5 +16,6 @@ public class StudentRepository {
     public void saveStudents(List<Student>students){
         JsonFileHandler.writeToJsonFile(STUDENT_FILE,students);
         System.out.println("Student saved Successfully");
+
     }
 }

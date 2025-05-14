@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Student {
@@ -15,6 +16,16 @@ public class Student {
         this.email = email;
         this.course = course;
         this.marks = marks;
+    }
+
+    public Student() {
+    }
+
+    public Student(int id, String name, String email, String course) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.course = course;
     }
 
     public int getId() {

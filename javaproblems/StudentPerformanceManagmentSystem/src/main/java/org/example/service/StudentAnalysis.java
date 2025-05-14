@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.entity.Student;
 import org.example.repository.StudentRepository;
+import org.example.utility.LoggerUtil;
 
 import java.util.Comparator;
 import java.util.List;
@@ -15,22 +16,20 @@ public class StudentAnalysis {
         studentList= studentRepository.loadStudents();
         if(studentList==null||studentList.isEmpty()){
             System.out.println("No Students found in Student.json");
-        }else {
-            System.out.println("Loaded Student"+studentList);
-
+            LoggerUtil.logWarning("No Students found in json");
         }
     }
     public List<Student>getTop3Student(List<Student>students){
         return studentList.stream()
-                .sorted((s1,s2)->Double.compare(getAverage(s2.getMarks()),
-                                     getAverage(s1.getMarks())
+                .sorted((s1,s2)->Double.compare(getStudentAverage(s2.getMarks()),
+                        getStudentAverage(s1.getMarks())
                         ))
                         .limit(3)
                         .collect(Collectors.toList());
 
     }
 
-    public double getAverage(List<Integer>marks){
+    public double getStudentAverage(List<Integer> marks){
         return marks.stream()
                 .mapToInt(Integer::intValue)
                 .average()
@@ -39,7 +38,7 @@ public class StudentAnalysis {
     }
     public void failedStudent(int marks){
         studentList.stream()
-                .filter(s->getAverage(s.getMarks())<40)
+                .filter(s->getStudentAverage(s.getMarks())<40)
                 .collect(Collectors.toList());
     }
     public List<Student> sortStudentByName(List<Student>students){
