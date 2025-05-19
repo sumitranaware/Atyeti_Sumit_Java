@@ -1,0 +1,2 @@
+This is a paragraph to read the words from this file and count the number of words present into a
+paragraph
