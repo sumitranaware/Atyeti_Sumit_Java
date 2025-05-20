@@ -17,7 +17,7 @@ public class ExtractRecipients {
 
            for (String part:parts){
                part=part.trim();
-               if (part.startsWith("To:")){
+               if (part.startsWith("From:")){
                    String email=part.substring(3).trim();
                    uniqueRec.add(email);
                }
