@@ -15,6 +15,8 @@ public class ExtractRecipients {
        while ((line=br.readLine())!=null){
            String [] parts=line.split("\\|");
 
+
+
            for (String part:parts){
                part=part.trim();
                if (part.startsWith("From:")){
