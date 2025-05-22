@@ -33,5 +33,6 @@ public class ExtractRecipients {
         for (String email:uniqueRec ){
             System.out.println(email);
         }
+        System.out.println("Thank You");
     }
 }
