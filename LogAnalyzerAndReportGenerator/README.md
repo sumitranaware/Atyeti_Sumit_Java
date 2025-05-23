@@ -1,6 +1,6 @@
 # Log Analyzer and Controller
 
-A Java-based Log Analyzer that processes `.log` files from given directories, counts the occurrences of `ERROR`, `WARNING`, and `INFO` messages, and optionally stores the results in a MySQL database using JDBC.
+A Java-based Log Analyzer that processes `.log` files from given directories, counts the occurrences of `ERROR`, `WARNING`, and `INFO` messages, and stores the results in a MySQL database using JDBC.
 
 ## Features
 - Scans multiple directories for `.log` files
