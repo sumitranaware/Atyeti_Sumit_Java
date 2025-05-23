@@ -15,6 +15,8 @@ public class ExtractRecipients {
        while ((line=br.readLine())!=null){
            String [] parts=line.split("\\|");
 
+
+
            for (String part:parts){
                part=part.trim();
                if (part.startsWith("From:")){
@@ -31,5 +33,6 @@ public class ExtractRecipients {
         for (String email:uniqueRec ){
             System.out.println(email);
         }
+        System.out.println("Thank You");
     }
 }
