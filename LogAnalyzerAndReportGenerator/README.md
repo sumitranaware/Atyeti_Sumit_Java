@@ -10,4 +10,4 @@ A Java-based Log Analyzer that processes `.log` files from given directories, co
     - `ERROR`
     - `WARNING`
     - `INFO`
-- Stores aggregated results to a database using JDBC
+- Stores aggregated results to a database using JDBC.
