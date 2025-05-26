@@ -10,7 +10,7 @@ public class ApplicationMain {
     public static void main(String[] args) {
         List<String> allLog = Arrays.asList(
                 "C:\\Users\\SumitRanaware\\OneDrive - Atyeti Inc\\Desktop\\Atyeti_Sumit_Java\\LogAnalyzerAndReportGenerator\\logs",
-"C:\\Users\\SumitRanaware\\OneDrive - Atyeti Inc\\Desktop\\Atyeti_Sumit_Java\\LogAnalyzerAndReportGenerator\\log1"
+ "C:\\Users\\SumitRanaware\\OneDrive - Atyeti Inc\\Desktop\\Atyeti_Sumit_Java\\LogAnalyzerAndReportGenerator\\log1"
         );
 LogAnalyzerController logAnalyzerController =new LogAnalyzerController();
 logAnalyzerController.LogRunner(allLog);

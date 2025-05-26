@@ -1,22 +1,27 @@
 package service;
 
-import utility.FileWriterUtility;
-
 import java.io.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LogAnalyzerService  {
-    private final Map<String ,Integer>logCount=new ConcurrentHashMap<>();
+    private final Map<String , AtomicInteger>logCount=new ConcurrentHashMap<>();
     private  LocalDateTime localDateTime=LocalDateTime.now();
     private final ExecutorService executorService= Executors.newFixedThreadPool(4);
   //   FileWriterUtility fileWriterUtility=new FileWriterUtility();
     private final List<String> collectedFilePaths = new ArrayList<>();
     public Map<String, Integer> getLogCount() {
-        return logCount;
+      Map<String, Integer>result=new HashMap<>();
+      for(Map.Entry<String,AtomicInteger>entry:logCount.entrySet()){
+          result.put(entry.getKey(),entry.getValue().get());
+      }
+      return result;
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -42,7 +47,13 @@ public class LogAnalyzerService  {
         }
 
         executorService.shutdown();
-
+       try{
+           if(!executorService.awaitTermination(60, TimeUnit.SECONDS)){
+               System.out.println("Timeout");
+           }
+       } catch (InterruptedException e) {
+           throw new RuntimeException(e);
+       }
     }
 
     private   void processSingleFile(File file) {
@@ -50,11 +61,11 @@ public class LogAnalyzerService  {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains("ERROR")) {
-                    logCount.merge("ERROR", 1, Integer::sum);
+                    logCount.computeIfAbsent("ERROR",k->new AtomicInteger()).incrementAndGet();
                 } else if (line.contains("WARNING")) {
-                    logCount.merge("WARNING", 1, Integer::sum);
+                    logCount.computeIfAbsent("WARNING", k->new AtomicInteger()).incrementAndGet();
                 } else if (line.contains("INFO")) {
-                    logCount.merge("INFO", 1, Integer::sum);
+                    logCount.computeIfAbsent("INFO",k->new AtomicInteger()).incrementAndGet();
                 }
             }
         } catch (IOException e) {
