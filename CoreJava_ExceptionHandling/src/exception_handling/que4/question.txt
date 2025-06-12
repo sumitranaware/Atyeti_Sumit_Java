@@ -1,0 +1,10 @@
+Problem: Finally Block Behavior with Return / Exception
+Goal: Explore combinations of try, catch, and finally with return statements and exceptions.
+
+Observe:
+
+Does finally always execute?
+
+What happens if finally has a return?
+
+What value is actually returned?
