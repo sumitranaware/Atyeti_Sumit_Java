@@ -1,0 +1,8 @@
+Java Virtual Threads
+
+Virtual threads are a new feature in Java that aim to simplify the development and maintenance of high-throughput concurrent applications. They are lightweight threads managed by the Java runtime rather than the operating system, allowing for a large number of concurrent tasks without the overhead associated with traditional platform threads
+Key Concepts
+
+Platform Threads vs. Virtual Threads
+
+Platform threads are thin wrappers around OS threads, capturing an OS thread for their entire lifetime. This limits the number of platform threads to the number of available OS threads. In contrast, virtual threads are not tied to specific OS threads. When a virtual thread performs a blocking I/O operation, the Java runtime suspends it, freeing the underlying OS thread to handle other task
