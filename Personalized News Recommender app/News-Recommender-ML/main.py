@@ -6,6 +6,8 @@ import json
 
 app = FastAPI()  
 
+
+
 with open("dummy_news.json", "r", encoding="utf-8") as f:
     all_articles = json.load(f)
 
