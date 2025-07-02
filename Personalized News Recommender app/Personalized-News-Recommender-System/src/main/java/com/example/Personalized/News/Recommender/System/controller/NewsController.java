@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/news")
 @RequiredArgsConstructor
@@ -51,7 +51,7 @@ public class NewsController {
 
     @PostMapping("/click")
     public ResponseEntity<String> trackClick(@RequestBody ArticleClickRequest dto) {
-        userInteractionService.saveClick(dto.getUserId(), dto.getTitle(), dto.getUrl());
+        userInteractionService.saveClick(dto.getUserId(), dto.getTitle(), dto.getCategory(), dto.getUrl());
         return ResponseEntity.ok("Click tracked");
     }
 //    @PostMapping("/register")

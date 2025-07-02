@@ -11,10 +11,11 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UserInteractionService {
     private final ClickRepository clickRepository;
-    public void saveClick(Long userId,String title, String url){
+    public void saveClick(Long userId,String title, String category ,String url){
         ArticleClick click=new ArticleClick();
          click.setUserId(userId);
          click.setArticleTitle(title);
+         click.setCategory(category);
          click.setArticleUrl(url);
          click.setClickedAt(LocalDateTime.now());
 

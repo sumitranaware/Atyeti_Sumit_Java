@@ -2,51 +2,61 @@ package com.example.Personalized.News.Recommender.System.service;
 
 import com.example.Personalized.News.Recommender.System.dto.ArticleDTO;
 import com.fasterxml.jackson.databind.JsonNode;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class NewsService {
 
-    private final WebClient webClient = WebClient.create("https://gnews.io");
-
     @Value("${gnews.api-key}")
     private String apiKey;
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     public List<ArticleDTO> fetchNews(String category) {
-        String url = "/api/v4/top-headlines?country=in&lang=en&topic=" + category + "&token=" + apiKey;
-
-
-        JsonNode response = webClient.get()
-                .uri(url)
-                .retrieve()
-                .bodyToMono(JsonNode.class)
-                .block();
-
-        if (response == null || !response.has("articles")) {
-            return Collections.emptyList();
-        }
-
         List<ArticleDTO> articles = new ArrayList<>();
-        for (JsonNode articleNode : response.get("articles")) {
-            ArticleDTO article = new ArticleDTO();
-            article.setTitle(articleNode.get("title").asText(""));
-            article.setDescription(articleNode.get("description").asText(""));
-            article.setUrl(articleNode.get("url").asText(""));
-            article.setCategory(category);
-            articles.add(article);
+        try {
+            String apiUrl = "https://gnews.io/api/v4/top-headlines?topic=" + category + "&lang=en&token=" + apiKey;
+
+            WebClient webClient = WebClient.builder().build();
+
+            JsonNode response = webClient.get()
+                    .uri(apiUrl)
+                    .retrieve()
+                    .bodyToMono(JsonNode.class)
+                    .onErrorResume(error -> {
+                        log.error("Error fetching news from GNews API: {}", error.getMessage());
+                        return Mono.empty();  // fallback to empty if API fails
+                    })
+                    .block();
+
+            if (response != null && response.has("articles")) {
+                for (JsonNode node : response.get("articles")) {
+                    ArticleDTO dto = new ArticleDTO();
+                    dto.setTitle(node.get("title").asText());
+                    dto.setDescription(node.get("description").asText());
+                    dto.setUrl(node.get("url").asText());
+                    dto.setCategory(category);
+                    articles.add(dto);
+                }
+            } else {
+                log.warn("No articles found or invalid response from GNews for category: {}", category);
+            }
+
+        } catch (Exception e) {
+            log.error("Exception in fetchNews(): {}", e.getMessage(), e);
         }
 
         return articles;
     }
 }
-
