@@ -36,7 +36,7 @@ public class NewsService {
                     .bodyToMono(JsonNode.class)
                     .onErrorResume(error -> {
                         log.error("Error fetching news from GNews API: {}", error.getMessage());
-                        return Mono.empty();  // fallback to empty if API fails
+                        return Mono.empty();
                     })
                     .block();
 

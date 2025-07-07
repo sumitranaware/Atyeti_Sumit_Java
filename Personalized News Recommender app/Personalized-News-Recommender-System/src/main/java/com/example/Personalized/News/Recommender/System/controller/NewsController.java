@@ -5,10 +5,7 @@ import com.example.Personalized.News.Recommender.System.dto.ArticleDTO;
 import com.example.Personalized.News.Recommender.System.dto.RecommendationRequestDto;
 import com.example.Personalized.News.Recommender.System.model.User;
 import com.example.Personalized.News.Recommender.System.repository.UserRepository;
-import com.example.Personalized.News.Recommender.System.service.NewsService;
-import com.example.Personalized.News.Recommender.System.service.RecommendationService;
-import com.example.Personalized.News.Recommender.System.service.UserInteractionService;
-import com.example.Personalized.News.Recommender.System.service.UserService;
+import com.example.Personalized.News.Recommender.System.service.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.LifecycleState;
@@ -16,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/news")
@@ -27,6 +27,7 @@ public class NewsController {
     private final UserService userService;
     private final UserInteractionService userInteractionService;
     UserRepository userRepository;
+
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RecommendationRequestDto dto) {
@@ -58,5 +59,7 @@ public class NewsController {
 //    public ResponseEntity<User>registerUser(@RequestBody User user){
 //        return ResponseEntity.ok(userRepository.save(user));
 //    }
+
+
 
 }
