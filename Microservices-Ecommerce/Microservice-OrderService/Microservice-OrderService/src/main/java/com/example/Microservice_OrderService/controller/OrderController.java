@@ -20,8 +20,8 @@ private final OrderService orderService;
 private final InventoryOpenFeignClient inventoryOpenFeignClient;
 
 @GetMapping("/helloOrders")
-public String helloOrders(){
-    return "hello from orders Service";
+public String helloOrders(@RequestHeader("X-User-Id")Long userId){
+    return "hello from orders Service user id is"+userId;
 }
 
     @PostMapping("/create-order")

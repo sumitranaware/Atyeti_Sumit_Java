@@ -1,3 +1,8 @@
+jwt:
+  secretKey: adsfkhsa45egeg
+
+
+
 server:
   port: 8082
 
@@ -13,6 +18,8 @@ spring:
             - Path=/api/v1/orders/**
           filters:
             - StripPrefix=2
+            - name: LoggingOrderFilters
+            - name: Authentication
         - id: inventory-service
           uri: lb://INVENTORY-SERVICE
           predicates:

@@ -6,6 +6,7 @@ import com.example.Microservice_OrderService.entity.OrderItem;
 import com.example.Microservice_OrderService.entity.OrderStatus;
 import com.example.Microservice_OrderService.entity.Orders;
 import com.example.Microservice_OrderService.repository.OrderRespository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,8 @@ public class OrderService {
 
     }
 
-    @Retry(name = "inventoryRetry", fallbackMethod = "createOrderFallback")
+   // @Retry(name = "inventoryRetry", fallbackMethod = "createOrderFallback")
+    @CircuitBreaker(name ="inventoryCircuitBreaker",fallbackMethod = "createOrderFallback")
     @RateLimiter(name="inventoryRateLimiter",fallbackMethod = "createOrderFallback")
     public OrderRequestDTO createOrder(OrderRequestDTO orderRequestDTO) {
        Double totalPrice=inventoryOpenFeignClient.reduceStocks(orderRequestDTO);
